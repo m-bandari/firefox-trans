@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "Trans",
-	"version": "1.0",
+	"version": "1.0.1",
 
 	"description": "This Add-on is for developers working with Oracle CPQ Cloud. Add-on is used to copy transaction ID of a quote and also provides the XML document of the quote.",
 
