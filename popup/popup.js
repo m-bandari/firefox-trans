@@ -18,7 +18,9 @@ function openXml(xslUrl,subdomain) {
 			var data = this.responseText;
 			var toSearch = "edit_xslt.jsp?id=";
 			var pos = data.indexOf(toSearch);
-			var xslId = data.substr(pos+toSearch.length,8); 		//retrieving xslt_id using string operations from the response 
+			var xslIdStr = data.substr(pos+toSearch.length,50);
+			var newpos = xslIdStr.indexOf("\"");
+			var xslId = xslIdStr.substr(0,newpos);	//retrieving xslt_id using string operations from the response
 			var xmlUrl = "https://" + subdomain + ".bigmachines.com/admin/commerce/views/preview_xml.jsp?bs_id=" + tranId + "&xslt_id=" + xslId + "&view_type=document"
 			browser.windows.create({url:xmlUrl});			
 		}
