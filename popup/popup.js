@@ -1,14 +1,13 @@
 browser.tabs.executeScript({file: "/manifest.js"});
-var getting = browser.runtime.getBackgroundPage();
-getting.then(onGot);
+
 var tranId;
 var procId;
 
-function onGot(page) {
-	document.getElementById("buysideid").value = page.tranId;
-	tranId = page.tranId;
-	procId = page.procId;
-}
+browser.runtime.onMessage.addListener((message => { //gets message from content_script, manifest.js
+	tranId = message.value;
+	document.getElementById("buysideid").value = tranId;
+	procId = message.value2;
+}))
 
 function openXml(xslUrl,subdomain) {
 	
@@ -34,22 +33,14 @@ document.addEventListener("click",function(event) {
 		copyText.select();
 		document.execCommand("copy");
 	}
-	else if(event.target.id === "refresh") {
-		browser.tabs.executeScript({file: "/manifest.js"});
-		var getting = browser.runtime.getBackgroundPage();
-		getting.then(onGot);
-	}
 	else if(event.target.id === "xml") {
-		browser.tabs.executeScript({file: "/manifest.js"});
-		var getting = browser.runtime.getBackgroundPage();
-		getting.then(onGot);
 		browser.tabs.query({currentWindow: true, active: true}, function(tabs){
-		currentUrl = tabs[0].url;					//getting the current url of the active tab to retrieve the domain name
-		var pos = currentUrl.search(".bigmachines.com");
-		var pos1 = currentUrl.search("//");
-		var subdomain = currentUrl.slice(pos1+2,pos);		
-		xslUrl = "https://" + subdomain + ".bigmachines.com/admin/commerce/views/list_xslt.jsp?process_id=" + procId;
-		openXml(xslUrl,subdomain);	
+			currentUrl = tabs[0].url;					//getting the current url of the active tab to retrieve the domain name
+			var pos = currentUrl.search(".bigmachines.com");
+			var pos1 = currentUrl.search("//");
+			var subdomain = currentUrl.slice(pos1+2,pos);
+			xslUrl = "https://" + subdomain + ".bigmachines.com/admin/commerce/views/list_xslt.jsp?process_id=" + procId;
+			openXml(xslUrl,subdomain);
 		});
 	}
 })
