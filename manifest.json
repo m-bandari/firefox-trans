@@ -1,47 +1,31 @@
 {
 	"manifest_version": 2,
 	"name": "Trans",
-	"version": "1.0.2",
-	"homepage_url": "https://github.com/Thinker1000/firefox-trans",
+	"version": "1.0.3",
+	"homepage_url": "https://github.com/m-bandari/firefox-trans",
 	"description": "This Add-on is for developers working with Oracle CPQ Cloud. Add-on is used to pull transaction ID and XML document of a quote.",
-
 	"icons": {
 		"48": "icons/Info.png"
 	},
 	"permissions": [
 		"activeTab",
 		"clipboardWrite",
-		"notifications",
 		"tabs",
-		"*://*.bigmachines.com/commerce/buyside/*"
+		"*://*.bigmachines.com/*"
 	],
-	"background": {
-	    "scripts": ["background.js"]
-	},
 	"browser_action": {
-		"default_icon" : "icons/Info.png",
+		"default_icon": "icons/Info.png",
 		"default_title": "Trans",
 		"default_popup": "popup/copy-popup.html"
 	},
 	"content_scripts": [
 		{
-			"matches": ["*://*.bigmachines.com/commerce/buyside/*"],
-			"js": ["manifest.js"]
+			"matches": [
+				"*://*.bigmachines.com/commerce/*"
+			],
+			"js": [
+				"manifest.js"
+			]
 		}
-	],
-	"commands": {
-		"open-xml": {
-			"suggested_key": {
-				"default": "Alt+X"
-			},
-			"description": "Opens XML document of the quote"
-		},
-		"copy-trans": {
-			"suggested_key": {
-				"default": "Alt+C"
-			},
-			"description": "Copies a transaction ID of a quote"
-		}
-	}
-
+	]
 }
