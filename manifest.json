@@ -1,31 +1,24 @@
 {
 	"manifest_version": 2,
 	"name": "Trans",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"homepage_url": "https://github.com/m-bandari/firefox-trans",
-	"description": "This Add-on is for developers working with Oracle CPQ Cloud. Add-on is used to pull transaction ID and XML document of a quote.",
+	"developer": {
+		"name": "Mahesh Bandari",
+		"url": "https://github.com/m-bandari/firefox-trans"
+	},
+	"description": "This Add-on is for developers working with Oracle® CPQ Cloud. Add-on is used to pull transaction ID and XML document of a quote.",
 	"icons": {
 		"48": "icons/Info.png"
 	},
 	"permissions": [
 		"activeTab",
 		"clipboardWrite",
-		"tabs",
-		"*://*.bigmachines.com/*"
+		"tabs"
 	],
 	"browser_action": {
 		"default_icon": "icons/Info.png",
 		"default_title": "Trans",
 		"default_popup": "popup/copy-popup.html"
-	},
-	"content_scripts": [
-		{
-			"matches": [
-				"*://*.bigmachines.com/commerce/*"
-			],
-			"js": [
-				"manifest.js"
-			]
-		}
-	]
+	}
 }
